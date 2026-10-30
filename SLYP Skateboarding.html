@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SLYP Skateboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fffaf0;--ink:#101010;--blue:#2430ff;--sun:#ffd400;--hot:#ff4b1f;--pink:#ff8fd0;--card:#fff;--mut:#55525f;
+--disp:"Bowlby One","Arial Black",Impact,sans-serif;--body:"Archivo","Helvetica Neue",Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#18151f;--ink:#f6f1e4;--card:#242030;--mut:#b4afc2;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#18151f;--ink:#f6f1e4;--card:#242030;--mut:#b4afc2;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.5 var(--body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sun);z-index:30}
+a{color:inherit}
+h1,h2,h3{font-family:var(--disp);font-weight:400;line-height:1;margin:0;letter-spacing:.01em}
+:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sun);border-bottom:4px solid #101010;color:#101010}
+.bar{display:flex;align-items:center;gap:16px;padding:10px 20px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
+.logo{font:400 38px/1 var(--disp);text-decoration:none;transform:rotate(-4deg);background:#101010;color:var(--sun);padding:2px 12px 4px;border-radius:6px;display:inline-block;transition:transform .15s}
+.logo:hover{transform:rotate(3deg) scale(1.06)}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+nav a{font-weight:800;text-decoration:none;padding:7px 14px;border:3px solid #101010;border-radius:99px;background:#fff7d0;color:#101010;font-size:15px}
+nav a:hover{background:var(--pink)}
+nav a[aria-current="page"]{background:#101010;color:var(--sun)}
+.cartpill{font-weight:800;border:3px solid #101010;border-radius:99px;padding:7px 14px;background:var(--hot);color:#fff;font-size:15px}
+
+/* marquee */
+.ticker{background:#101010;color:var(--sun);overflow:hidden;white-space:nowrap;border-bottom:4px solid #101010}
+.ticker div{display:inline-block;padding:9px 0;font:400 20px/1 var(--disp);animation:run 28s linear infinite}
+.ticker span{margin:0 22px}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* hero */
+.hero{background:var(--blue);color:#fff;border-bottom:4px solid #101010;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding-top:56px;padding-bottom:64px}
+.hero h1{font-size:clamp(54px,10vw,128px);text-shadow:6px 6px 0 #101010;animation:slam .6s cubic-bezier(.2,1.6,.4,1) both}
+.hero h1 em{font-style:normal;color:var(--sun)}
+@keyframes slam{from{transform:scale(1.5) rotate(-6deg);opacity:0}}
+.hero p{font-size:20px;max-width:30ch;margin:20px 0 28px;font-weight:600}
+.sticker{position:absolute;font:400 22px/1 var(--disp);color:#101010;background:var(--pink);border:4px solid #101010;border-radius:50%;width:120px;height:120px;display:grid;place-items:center;text-align:center;transform:rotate(14deg);right:5%;top:18px;box-shadow:5px 5px 0 #101010;animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(-8deg) scale(1.05)}}
+.btn{display:inline-block;font:400 20px/1 var(--disp);text-decoration:none;background:var(--sun);color:#101010;border:4px solid #101010;border-radius:12px;padding:14px 22px;box-shadow:6px 6px 0 #101010;transition:transform .1s,box-shadow .1s;cursor:pointer}
+.btn:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 #101010}
+.btn.alt{background:#fff;margin-left:8px}
+.btn.off{background:var(--paper);color:var(--ink);font-size:15px;padding:10px 14px;box-shadow:none;border-width:3px;cursor:default;width:100%;text-align:center;border-color:var(--ink)}
+.btn.off:hover{transform:none}
+
+/* placeholder images */
+.ph{position:relative;background:repeating-linear-gradient(135deg,var(--pink) 0 14px,#ffc4e6 14px 28px);border:4px solid var(--ink);border-radius:14px;overflow:hidden;display:grid;place-items:center;text-align:center;color:#101010;font-weight:800;aspect-ratio:4/5}
+.ph::after{content:attr(data-label);background:#fff;border:3px solid #101010;border-radius:99px;padding:4px 12px;font-size:13px;transform:rotate(-3deg);max-width:85%}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.ph:has(img)::after{display:none}
+.ph.wide{aspect-ratio:16/10}.ph.sq{aspect-ratio:1}.ph.tall{aspect-ratio:3/5}
+
+/* sections */
+main section.view{display:none;padding:48px 0 72px;animation:pop .25s ease-out}
+main section.view.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}}
+.title{font-size:clamp(40px,7vw,80px);margin-bottom:8px}
+.title span{display:inline-block;background:var(--sun);color:#101010;border:4px solid #101010;padding:0 14px 4px;border-radius:10px;transform:rotate(-1.5deg);box-shadow:6px 6px 0 var(--ink)}
+.lede{color:var(--mut);max-width:52ch;margin:18px 0 32px;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px}
+.card{background:var(--card);border:4px solid var(--ink);border-radius:16px;padding:12px;box-shadow:7px 7px 0 var(--ink);position:relative;transition:transform .15s}
+.card:hover{transform:rotate(-1deg) translateY(-4px)}
+.card h3{font-size:21px;margin:14px 2px 4px}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin:0 2px 12px;color:var(--mut);font-weight:600;font-size:15px}
+.price{font:400 22px/1 var(--disp);color:var(--ink)}
+.tag{position:absolute;top:-10px;left:-10px;z-index:3;background:var(--hot);color:#fff;font:400 14px/1 var(--disp);padding:6px 10px;border:3px solid #101010;border-radius:8px;transform:rotate(-8deg)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:56px 0}
+.tile{display:block;text-decoration:none;color:#101010;border:4px solid #101010;border-radius:18px;padding:26px;min-height:190px;box-shadow:7px 7px 0 var(--ink);font:400 38px/1 var(--disp);transition:transform .15s}
+.tile small{display:block;font:600 16px/1.4 var(--body);margin-top:10px;max-width:24ch}
+.tile:hover{transform:rotate(1.5deg) scale(1.02)}
+.band{background:var(--hot);color:#fff;border:4px solid #101010;border-radius:18px;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;box-shadow:7px 7px 0 var(--ink);margin-top:56px}
+.band h2{font-size:clamp(30px,5vw,52px);text-shadow:4px 4px 0 #101010}
+.band p{margin:12px 0 0;font-weight:600}
+.look{columns:3 220px;column-gap:20px}
+.look .ph{margin:0 0 20px;break-inside:avoid;box-shadow:6px 6px 0 var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+.cols p{margin:0 0 16px;max-width:56ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:28px}
+.fact{border:4px solid var(--ink);border-radius:14px;padding:14px;background:var(--sun);color:#101010;font-weight:600;box-shadow:5px 5px 0 var(--ink)}
+.fact b{display:block;font:400 34px/1 var(--disp)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.info .card h3{margin-top:4px}
+.info .card p{margin:6px 2px 4px;color:var(--mut)}
+footer{background:#101010;color:#fff7d0;border-top:4px solid #101010;padding:36px 0 44px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+footer .logo{font-size:30px;background:var(--sun);color:#101010}
+footer p{margin:0;color:#c9c3b3;font-size:15px}
+@media (max-width:760px){.hero .wrap,.band,.cols{grid-template-columns:1fr}.sticker{width:92px;height:92px;font-size:17px;top:10px}.btn.alt{margin:14px 0 0}nav{margin-left:0}.bar{padding:10px 14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="#home" aria-label="SLYP home">SLYP</a>
+    <nav aria-label="Main">
+      <a href="#home">Home</a><a href="#decks">Decks</a><a href="#apparel">Apparel</a><a href="#gear">Gear</a><a href="#lookbook">Lookbook</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <span class="cartpill" title="Cart is coming soon">Cart (0)</span>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div id="tick"></div></div>
+
+<main>
+
+<section class="view" id="v-home">
+  <div class="hero" style="margin-top:-48px;margin-bottom:0">
+    <div class="sticker">New<br>drop</div>
+    <div class="wrap">
+      <div>
+        <h1>Skate it<br><em>slick.</em></h1>
+        <p>Decks, threads and hardware built for people who ride every day.</p>
+        <a class="btn" href="#decks">Shop decks</a><a class="btn alt" href="#lookbook">See the lookbook</a>
+      </div>
+      <!-- HERO IMAGE: put <img src="your-photo.jpg" alt="..."> inside the div below -->
+      <div class="ph" data-label="Hero photo or video still" style="transform:rotate(3deg);box-shadow:10px 10px 0 #101010"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <h2 class="title" style="margin-top:56px"><span>Fresh drops</span></h2>
+    <p class="lede">The newest boards, tees and gear. Product photos and prices are placeholders for now.</p>
+    <div class="grid" id="g-home"></div>
+    <div class="tiles">
+      <a class="tile" href="#decks" style="background:var(--sun)">Decks<small>Street, park and cruiser shapes.</small></a>
+      <a class="tile" href="#apparel" style="background:var(--pink)">Apparel<small>Tees, hoodies, hats and socks.</small></a>
+      <a class="tile" href="#gear" style="background:#7df0ff">Gear<small>Trucks, wheels, bearings and grip.</small></a>
+    </div>
+    <div class="band">
+      <div>
+        <h2>Free stickers with every order</h2>
+        <p>Slap them on your deck, your helmet or your laptop. Swap this banner for your real promo.</p>
+      </div>
+      <div class="ph wide" data-label="Promo image"></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="v-decks"><div class="wrap">
+  <h2 class="title"><span>Decks</span></h2>
+  <p class="lede">Seven-ply maple, pressed in the shapes you ride most. Add your own deck photos and graphics here.</p>
+  <div class="grid" id="g-decks"></div>
+</div></section>
+
+<section class="view" id="v-apparel"><div class="wrap">
+  <h2 class="title"><span>Apparel</span></h2>
+  <p class="lede">Wear it on and off the board. Swap in your own product shots whenever they are ready.</p>
+  <div class="grid" id="g-apparel"></div>
+</div></section>
+
+<section class="view" id="v-gear"><div class="wrap">
+  <h2 class="title"><span>Gear</span></h2>
+  <p class="lede">Everything between the deck and the ground, plus the stuff that keeps you rolling.</p>
+  <div class="grid" id="g-gear"></div>
+</div></section>
+
+<section class="view" id="v-lookbook"><div class="wrap">
+  <h2 class="title"><span>Lookbook</span></h2>
+  <p class="lede">Team clips, session photos and campaign shots live here. Drop in photos of any shape.</p>
+  <div class="look" id="look"></div>
+</div></section>
+
+<section class="view" id="v-about"><div class="wrap">
+  <h2 class="title"><span>About SLYP</span></h2>
+  <p class="lede">Your story goes here.</p>
+  <div class="cols">
+    <div>
+      <p>SLYP started with a simple idea: a board should feel as good on the tenth session as it does on the first. Replace this text with how your brand began, who is behind it and what you stand for.</p>
+      <p>Tell people where you ride, who you ride with and what makes your boards different. A few honest sentences work better than a long pitch.</p>
+      <div class="facts">
+        <div class="fact"><b>100%</b>Rider owned</div>
+        <div class="fact"><b>7-ply</b>Maple decks</div>
+        <div class="fact"><b>Local</b>Shop and crew</div>
+      </div>
+    </div>
+    <div class="ph" data-label="Founder or crew photo"></div>
+  </div>
+</div></section>
+
+<section class="view" id="v-contact"><div class="wrap">
+  <h2 class="title"><span>Contact</span></h2>
+  <p class="lede">Questions, collabs or sponsorship ideas. Fill in your real details below.</p>
+  <div class="info">
+    <div class="card"><h3>Email</h3><p>hello@yourdomain.com</p></div>
+    <div class="card"><h3>Instagram</h3><p>@yourhandle</p></div>
+    <div class="card"><h3>Visit</h3><p>Street address, City<br>Hours go here</p></div>
+    <div class="card"><div class="ph wide" data-label="Map or storefront photo"></div></div>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <a class="logo" href="#home">SLYP</a>
+  <p>© 2026 SLYP Skateboarding. All rights reserved.</p>
+</div></footer>
+
+<script>
+/* ---- EDIT HERE ----
+   To add your own photo to any product, put its file path in img, e.g. img:"images/deck1.jpg".
+   Leave img empty to keep the placeholder. */
+var P={
+decks:[
+{n:"Classic 8.0 Deck",p:"$65",t:"New",img:""},{n:"Wide 8.5 Deck",p:"$68",img:""},{n:"Mini 7.5 Deck",p:"$60",img:""},{n:"Cruiser Deck",p:"$72",img:""},
+{n:"Park Deck",p:"$66",img:""},{n:"Street Deck",p:"$64",img:""},{n:"Team Deck",p:"$70",t:"Hot",img:""},{n:"Blank Deck",p:"$48",img:""}],
+apparel:[
+{n:"Logo Tee",p:"$30",t:"New",img:""},{n:"Pullover Hoodie",p:"$65",img:""},{n:"Snapback Cap",p:"$28",img:""},{n:"Crew Socks",p:"$14",img:""},
+{n:"Work Jacket",p:"$95",img:""},{n:"Long Sleeve",p:"$38",img:""},{n:"Beanie",p:"$24",img:""},{n:"Tote Bag",p:"$20",img:""}],
+gear:[
+{n:"Trucks (pair)",p:"$45",img:""},{n:"Wheels 54mm",p:"$38",t:"Hot",img:""},{n:"Bearings",p:"$22",img:""},
+{n:"Grip Tape",p:"$8",img:""},{n:"Hardware Kit",p:"$6",img:""},{n:"Skate Tool",p:"$12",img:""},{n:"Sticker Pack",p:"$5",img:""},{n:"Wax Bar",p:"$4",img:""}]
+};
+P.home=[P.decks[0],P.apparel[0],P.gear[1],P.decks[6]];
+
+function card(x){
+  var t=x.t?'<span class="tag">'+x.t+'</span>':'';
+  var im=x.img?'<img src="'+x.img+'" alt="'+x.n+'">':'';
+  return '<article class="card">'+t+'<div class="ph" data-label="Product photo">'+im+'</div><h3>'+x.n+'</h3><div class="meta"><span>Details soon</span><span class="price">'+x.p+'</span></div><span class="btn off">Coming soon</span></article>';
+}
+["home","decks","apparel","gear"].forEach(function(k){document.getElementById("g-"+k).innerHTML=P[k].map(card).join("")});
+
+var shapes=["","tall","sq","wide","","tall","sq","","wide"];
+document.getElementById("look").innerHTML=shapes.map(function(s,i){return '<div class="ph '+s+'" data-label="Lookbook photo '+(i+1)+'"></div>'}).join("");
+
+var words=["Free stickers with every order","New decks just landed","Ride slick","Local crew, global sessions","SLYP"];
+var row=words.map(function(w){return "<span>"+w+"</span>"}).join("");
+document.getElementById("tick").innerHTML=row+row+row+row;
+
+var views=["home","decks","apparel","gear","lookbook","about","contact"];
+function route(){
+  var h=(location.hash||"#home").slice(1);
+  if(views.indexOf(h)<0)h="home";
+  views.forEach(function(v){document.getElementById("v-"+v).classList.toggle("on",v===h)});
+  document.querySelectorAll("nav a").forEach(function(a){
+    if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
